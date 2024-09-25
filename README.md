@@ -23,7 +23,7 @@
 
 #### 源码安装
 ```shell
-git clone https://code.alipay.com/amlregservermodel/python-gen-model.git
+git clone https://github.com/edisonwd/python-gen-model.git
 
 cd python-gen-model
 
