@@ -1,0 +1,70 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "python-gen-model"
+dynamic = ["version"]
+description = '生成数据库表对应的Model类'
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "edisonwd", email = "2388100489@qq.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "tortoise-orm",
+  "pymysql",
+  "peewee",
+  "cryptography",
+]
+
+[project.urls]
+Documentation = "https://github.com/edisonwd/python-gen-model#readme"
+Issues = "https://github.com/edisonwd/python-gen-model/issues"
+Source = "https://github.com/edisonwd/python-gen-model"
+
+[tool.hatch.version]
+path = "src/python_gen_model/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/python_gen_model tests}"
+
+[tool.coverage.run]
+source_pkgs = ["python_gen_model", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/python_gen_model/__about__.py",
+]
+
+[tool.coverage.paths]
+python_gen_model = ["src/python_gen_model", "*/python-gen-model/src/python_gen_model"]
+tests = ["tests", "*/python-gen-model/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[project.scripts]
+python-gen-model = "python_gen_model.main:main"
+python-gen-model_v1 = "gen_model.main:main"
